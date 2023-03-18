@@ -12,7 +12,7 @@ fn index() -> &'static str {
 
 #[get("/tag")]
 fn get_tag() -> Json<Tag> {
-    Json(Tag::new(Uuid::new_v4(), "title".to_owned()))
+    Json(Tag::new("title".to_owned()))
 }
 
 
