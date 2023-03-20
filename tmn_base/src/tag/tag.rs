@@ -16,7 +16,6 @@ pub struct Tag {
 }
 
 impl Tag {
-    // ToDo make tags unique
     pub fn new(id: TagId, title: String) -> Tag {
         Tag {
             id: id,
@@ -30,13 +29,19 @@ impl Tag {
         &self.id
     }
 
-    pub fn add_ref(&mut self, tagable_id: TagableId) {
+    pub fn get_title(&self) -> &str {
+        &self.title
+    }
+
+    pub(super) fn add_ref(&mut self, tagable_id: TagableId) {
         self.references.insert(tagable_id);
     }
 
-    pub fn rm_ref(&mut self, tagable_id: &TagableId) {
+    pub(super) fn rm_ref(&mut self, tagable_id: &TagableId) {
         self.references.remove(tagable_id);
     }
+
+    
 }
 
 impl PartialEq for Tag {
@@ -46,3 +51,4 @@ impl PartialEq for Tag {
 }
 
 impl Eq for Tag {}
+

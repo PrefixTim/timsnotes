@@ -1,3 +1,3 @@
-mod tag;
+pub mod tag;
 mod id;
-mod content;
+pub mod content;
