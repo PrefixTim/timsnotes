@@ -1,28 +1,35 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
 
+use crate::id::Id;
 use super::tag::{Tag, TagId};
 
-pub use uuid::Uuid as TagableId;
+pub struct TagableID;
+pub type TagableId = Id<TagableID>;
 
 #[derive(Serialize, Deserialize)]
 pub struct Tags {
+    tagable_id: TagableId, 
     tags: HashSet<TagId>,
 }
 
 impl Tags {
-    pub fn new() -> Self {
+    pub fn new(id: TagableId) -> Self {
         Tags {
+            tagable_id: id,
             tags: HashSet::new(),
         }
     }
 }
 
 pub trait Tagable {
-    fn get_tagable_id(&self) -> &TagableId;
     fn get_mut_tags(&mut self) -> &mut Tags;
     fn get_tags(&self) -> &Tags;
-
+    
+    fn get_tagable_id(&self) -> &TagableId {
+        &self.get_tags().tagable_id
+    }
+    
     fn has_tag_id(&self, tagid: &TagId) -> bool {
         self.get_tags().tags.contains(tagid)
     }
@@ -35,7 +42,7 @@ pub trait Tagable {
         if !self.has_tag(tag) {
             Err(())
         } else {
-            tag.rm_ref(self.get_tagable_id());
+            tag.rm_ref(&self.get_tagable_id());
             self.get_mut_tags().tags.remove(tag.get_id());
             Ok(())
         }

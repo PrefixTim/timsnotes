@@ -1,10 +1,12 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
 
+use crate::id::Id;
+
 use super::tagable::TagableId;
 
-pub use i32 as TagId;
-
+pub struct TagID;
+pub type TagId = Id<TagID>;
 #[derive(Serialize, Deserialize)]
 pub struct Tag {
     id: TagId,
