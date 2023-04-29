@@ -25,6 +25,6 @@ fn get_tag(state: &State<Arc<FakeDb>>) -> Json<Tag> {
 fn rocket() -> _ {
     let fdb =Arc::new(FakeDb{tags: Vec::new(), thoughts: Vec::new()});
     rocket::build()
-    .mount("/", routes![index, get_tag, tag_title])
+    .mount("/", routes![index, get_tag])
     .manage(fdb)
 }
