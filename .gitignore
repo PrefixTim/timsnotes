@@ -1,3 +1,6 @@
 /target
 *.lock
 /dist
+
+/tmn_web/node_modules/*
+/tmn_web/dist/*
