@@ -1,7 +1,0 @@
-[workspace]
-
-members = [
-    "tmn_base",
-    "tmn_api",
-    "tmn_web"
-]
